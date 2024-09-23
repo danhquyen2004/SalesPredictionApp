@@ -106,17 +106,17 @@
         <h1>Dự đoán Doanh số từ TV, Radio, Newspaper</h1>
         <form id="prediction-form">
             <div class="form-group">
-                <label for="tv">TV:</label>
+                <label for="tv">Tiền quảng cáo trên TV (ngàn usd):</label>
                 <input type="number" step="any" name="tv" required>
             </div>
 
             <div class="form-group">
-                <label for="radio">Radio:</label>
+                <label for="radio">Tiền quảng cáo trên Radio (ngàn usd):</label>
                 <input type="number" step="any" name="radio" required>
             </div>
 
             <div class="form-group">
-                <label for="newspaper">Newspaper:</label>
+                <label for="newspaper">Tiền quảng cáo trên Newspaper (ngàn usd):</label>
                 <input type="number" step="any" name="newspaper" required>
             </div>
 
@@ -156,7 +156,7 @@
                     document.getElementById('error-message').innerText = data.error;
                     document.getElementById('prediction-result').innerText = '';
                 } else {
-                    document.getElementById('prediction-result').innerText = `Dự đoán Doanh số: ${data.prediction}`;
+                    document.getElementById('prediction-result').innerText = `Dự đoán Doanh số: ${data.prediction} sản phẩm`;
                     document.getElementById('error-message').innerText = '';
                 }
             })
