@@ -19,22 +19,24 @@ with open('scaler.pkl', 'rb') as f:
 @app.route('/', methods=['GET', 'POST'])
 def index():
     prediction = None
+    error = None
     if request.method == 'POST':
-        tv = float(request.form['tv'])
-        radio = float(request.form['radio'])
-        newspaper = float(request.form['newspaper'])
-        selected_model = request.form['model']
+        try:
+            tv = float(request.form['tv'])
+            radio = float(request.form['radio'])
+            newspaper = float(request.form['newspaper'])
+            selected_model = request.form['model']
 
-        # Chuẩn hóa dữ liệu đầu vào
-        input_data = np.array([[tv, radio, newspaper]])
-        input_data_scaled = scaler.transform(input_data)
+            input_data = np.array([[tv, radio, newspaper]])
+            input_data_scaled = scaler.transform(input_data)
 
-        # Dự đoán với mô hình đã chọn
-        prediction = models[selected_model].predict(input_data_scaled)[0]
+            prediction = models[selected_model].predict(input_data_scaled)[0]
 
-        result = round(prediction*1000, 2)
+            prediction = round(prediction * 1000, 2)
+        except Exception as e:
+            error = str(e)
 
-    return render_template('index.html', prediction=result, model_names=model_names)
+    return render_template('index.html', prediction=prediction, model_names=model_names, error=error)
 
 if __name__ == '__main__':
     app.run(debug=True)
